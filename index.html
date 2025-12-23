@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật Bố Trung</title>
+    
+    <!-- Thư viện AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS (Để layout nhanh và responsive) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome cho Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Cấu hình màu sắc và Font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#1a2a6c',
+                        gold: '#d4af37',
+                        cream: '#fdfcf0',
+                        creamDark: '#f2f0e4',
+                        pineGreen: '#2d5a27',
+                        xmasRed: '#c0392b',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Quicksand"', 'sans-serif'],
+                        hand: ['"Dancing Script"', 'cursive'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'float-particle': 'floatParticle 20s linear infinite',
+                        'spin-slow': 'spin 4s linear infinite',
+                        'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+                        'flash-lights': 'flashLights 2s infinite alternate',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                        floatParticle: {
+                            '0%': { transform: 'translateY(0) translateX(0)', opacity: 0 },
+                            '10%': { opacity: 1 },
+                            '90%': { opacity: 1 },
+                            '100%': { transform: 'translateY(-100vh) translateX(20px)', opacity: 0 },
+                        },
+                        flashLights: {
+                            '0%': { opacity: 0.5, filter: 'brightness(1)' },
+                            '100%': { opacity: 1, filter: 'brightness(1.5)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- CSS Tùy chỉnh --- */
+        body {
+            background-color: #fdfcf0; /* Cream fallback */
+            /* Họa tiết chấm bi nền (Polka Dots) */
+            background-image: radial-gradient(#d4af37 0.8px, transparent 0.8px), radial-gradient(#1a2a6c 0.8px, transparent 0.8px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            overflow-x: hidden;
+            color: #1a2a6c;
+        }
+
+        /* Ẩn thanh cuộn lúc đầu để tập trung vào hộp quà */
+        body.locked {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* --- BACKGROUND LAYER 1 (Ảnh nền cũ) --- */
+        #bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            /* Thay thế '18.jpg' bằng tên file ảnh của bạn */
+            background-image: url('18.jpg'); 
+            background-size: cover;
+            background-position: center;
+            /* Giảm độ mờ và tăng độ sáng để ảnh rõ hơn */
+            filter: blur(4px) brightness(1.0); 
+            transform: scale(1.05); /* Zoom nhẹ */
+            opacity: 0.4; /* Giảm độ trong suốt để lộ nền chấm bi */
+        }
+
+        /* --- BACKGROUND LAYER 2 (Ảnh nền MỚI thêm vào) --- */
+        #bg-layer-2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10; /* Cùng lớp với bg 1 để hòa trộn */
+            
+            /* --- THAY ĐỔI TÊN FILE ẢNH MỚI CỦA BẠN Ở ĐÂY --- */
+            background-image: url('background_moi.jpg'); 
+            
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px) sepia(0.2); /* Làm mờ và thêm chút màu xưa cũ */
+            opacity: 0.3; /* Độ mờ nhẹ để hòa cùng background cũ */
+            mix-blend-mode: multiply; /* Hòa trộn với lớp dưới */
+            transform: scale(1.1);
+        }
+
+        /* Lớp phủ hạt (Grain Overlay) tạo cảm giác ảnh phim */
+        #grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -9;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        
+        /* Lớp phủ màu kem nhạt để dễ đọc chữ */
+        #tint-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -8;
+            background-color: rgba(253, 252, 240, 0.7); /* Cream color with less opacity */
+            pointer-events: none;
+        }
+
+        /* --- DECORATION: BALLOONS (Bóng bay nền) --- */
+        .balloon-bg {
+            position: fixed;
+            bottom: -100px;
+            width: 50px;
+            height: 65px;
+            border-radius: 50%;
+            z-index: -6; /* Nằm trên nền, dưới nội dung */
+            opacity: 0.5;
+            animation: rise 15s infinite ease-in;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+        }
+        .balloon-bg::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background: rgba(0,0,0,0.2);
+        }
+        .balloon-bg:nth-child(1) { left: 10%; background: #d4af37; animation-duration: 18s; animation-delay: 0s; }
+        .balloon-bg:nth-child(2) { left: 20%; background: #1a2a6c; animation-duration: 22s; animation-delay: 5s; transform: scale(0.8); }
+        .balloon-bg:nth-child(3) { left: 35%; background: #e74c3c; animation-duration: 20s; animation-delay: 2s; }
+        .balloon-bg:nth-child(4) { left: 70%; background: #d4af37; animation-duration: 25s; animation-delay: 8s; transform: scale(1.2); }
+        .balloon-bg:nth-child(5) { left: 85%; background: #1a2a6c; animation-duration: 19s; animation-delay: 3s; }
+        .balloon-bg:nth-child(6) { left: 55%; background: #f39c12; animation-duration: 21s; animation-delay: 10s; transform: scale(0.9); }
+
+        @keyframes rise {
+            0% { bottom: -100px; transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(30px) rotate(5deg); }
+            100% { bottom: 120vh; transform: translateX(-30px) rotate(-5deg); }
+        }
+
+        /* --- DECORATION: FIREFLIES (Đom đóm) --- */
+        .firefly {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background-color: #d4af37;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(212, 175, 55, 0.4);
+            pointer-events: none;
+            z-index: -5;
+            animation: floatParticle 15s linear infinite;
+            opacity: 0;
+        }
+
+        /* --- DECORATION: SPARKLES (Ngôi sao lấp lánh) --- */
+        .sparkle {
+            position: absolute;
+            color: #d4af37;
+            animation: ping-slow 2s infinite;
+            opacity: 0.8;
+        }
+
+        /* --- DECORATION: BUNTING (Dây cờ) --- */
+        .bunting-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .bunting-rope {
+            position: absolute;
+            top: -20px;
+            left: -5%;
+            width: 110%;
+            height: 100px;
+            border-bottom: 3px solid rgba(26, 42, 108, 0.2);
+            border-radius: 50%;
+        }
+        .flag {
+            position: absolute;
+            top: 65px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #d4af37;
+            transform-origin: top center;
+            animation: sway 3s ease-in-out infinite alternate;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+        .flag:nth-child(odd) { border-top-color: #1a2a6c; animation-delay: 0.5s; }
+        .flag:nth-child(3n) { border-top-color: #c0392b; animation-delay: 1s; }
+        
+        @keyframes sway {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        /* --- 3D GIFT BOX STYLES --- */
+        .gift-container {
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .gift-container:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-box {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .gift-box.open {
+            animation: none;
+        }
+
+        .gift-face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: #1a2a6c; /* Navy */
+            border: 2px solid #d4af37; /* Gold */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ribbon */
+        .gift-face::before, .gift-face::after {
+            content: '';
+            position: absolute;
+            background: #d4af37;
+        }
+        .gift-face::before { width: 30px; height: 100%; left: 60px; }
+        .gift-face::after { width: 100%; height: 30px; top: 60px; }
+
+        .front  { transform: translateZ(75px); }
+        .back   { transform: rotateY(180deg) translateZ(75px); }
+        .left   { transform: rotateY(-90deg) translateZ(75px); }
+        .right  { transform: rotateY(90deg) translateZ(75px); }
+        .bottom { transform: rotateX(-90deg) translateZ(75px); }
+        
+        .lid {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: #253b8e; /* Lighter Navy */
+            border: 2px solid #d4af37;
+            top: -75px;
+            left: 0;
+            transform: rotateX(90deg);
+            transform-origin: bottom;
+            transition: transform 0.5s ease-in-out, top 0.5s ease-in-out;
+            z-index: 10;
+        }
+        .lid::before { content: ''; position: absolute; width: 30px; height: 100%; left: 60px; background: #d4af37; }
+        .lid::after { content: ''; position: absolute; width: 100%; height: 30px; top: 60px; background: #d4af37; }
+
+        .gift-box.open .lid {
+            transform: rotateX(120deg);
+            top: -100px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateY(15deg) rotateX(10deg); }
+            50% { transform: translateY(-20px) rotateY(15deg) rotateX(10deg); }
+        }
+
+        /* --- TIMELINE STYLES --- */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px; /* Tăng độ dày để làm thân dây leo */
+            height: 100%;
+            background-color: #d4af37;
+            z-index: 0;
+        }
+
+        /* HIỆU ỨNG DÂY LEO CÂY THÔNG (PINE VINE) */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -12px;
+            width: 28px;
+            height: 100%;
+            /* Tạo họa tiết dây leo quấn quanh bằng gradient */
+            background: 
+                radial-gradient(circle at 100% 50%, transparent 20%, #2d5a27 21%, #2d5a27 34%, transparent 35%, transparent),
+                radial-gradient(circle at 0% 50%, transparent 20%, #2d5a27 21%, #2d5a27 34%, transparent 35%, transparent);
+            background-size: 30px 60px;
+            background-position: 0 0, 0 30px;
+            opacity: 0.8;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Thêm gai lá thông nhỏ dọc dây leo */
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -15px;
+            width: 34px;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, transparent 45%, #1e3d1b 45%, #1e3d1b 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, #1e3d1b 45%, #1e3d1b 55%, transparent 55%);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background-color: #c0392b; /* Đổi sang màu đỏ giáng sinh */
+            border: 4px solid #fdfcf0;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px #2d5a27; /* Viền xanh lá */
+        }
+
+        /* --- CHRISTMAS LIGHTS (Dây đèn) --- */
+        .light-string {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            height: 20px;
+            position: absolute;
+            top: -30px;
+            left: 0;
+            pointer-events: none;
+            z-index: 5;
+            border-top: 2px solid #555; /* Dây điện */
+            border-radius: 50%;
+        }
+        
+        .c-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: relative;
+            top: 5px;
+            animation: flash-lights 2s infinite alternate;
+        }
+        .c-light:nth-child(odd) { background-color: #c0392b; animation-delay: 0s; box-shadow: 0 2px 5px #c0392b; }
+        .c-light:nth-child(even) { background-color: #d4af37; animation-delay: 1s; box-shadow: 0 2px 5px #d4af37; }
+        .c-light:nth-child(3n) { background-color: #27ae60; animation-delay: 0.5s; box-shadow: 0 2px 5px #27ae60; }
+
+
+        @media (max-width: 768px) {
+            .timeline-line { left: 20px; }
+            .timeline-dot { left: 20px; }
+            .timeline-content { margin-left: 40px !important; width: auto !important; text-align: left !important; }
+            .timeline-item:nth-child(even) .timeline-content { align-items: flex-start !important; }
+        }
+
+        /* --- NEW PHOTO FRAMES STYLE (Khung Tranh Treo Tường + Decor Xmas) --- */
+        .photo-frame {
+            background: white; /* Màu bo trắng (Matting) */
+            padding: 12px;     /* Độ dày của bo trắng */
+            
+            /* Khung chính: Màu vàng gold sang trọng */
+            border: 8px solid #d4af37; 
+            
+            /* Tạo hiệu ứng 3D cho khung bằng màu đậm nhạt */
+            border-bottom-color: #b8952b; 
+            border-right-color: #b8952b;
+            
+            /* Bóng đổ và các lớp viền */
+            box-shadow: 
+                /* Lớp 1: Bóng bên trong sát ảnh (Inner shadow) */
+                inset 0 0 5px rgba(0,0,0,0.3),
+                
+                /* Lớp 2: Viền Navy mỏng bao quanh khung gold để tách nền */
+                0 0 0 1px #1a2a6c,
+                
+                /* Lớp 3: Bóng đổ xuống tường (Drop shadow) */
+                10px 15px 25px rgba(26, 42, 108, 0.3);
+                
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border-radius: 2px;
+        }
+
+        /* Decor góc khung tranh (Cành thông/Holly) */
+        .frame-decor-corner {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 2rem;
+            color: #2d5a27;
+            z-index: 25;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+            transform: rotate(15deg);
+        }
+
+        /* Mũ Noel trên tiêu đề */
+        .santa-hat-icon {
+            position: absolute;
+            top: -25px;
+            left: -15px;
+            font-size: 3rem;
+            color: #c0392b;
+            transform: rotate(-15deg);
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+            z-index: 20;
+        }
+        
+        /* Đinh treo tranh (Giả lập) */
+        .photo-frame::after {
+            content: '';
+            position: absolute;
+            top: -16px; /* Nằm ngay trên mép khung */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            /* Tạo hình cái đinh mũ tròn vàng */
+            background: radial-gradient(circle at 30% 30%, #fff, #d4af37);
+            border-radius: 50%;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+            z-index: 20;
+        }
+        
+        .photo-frame:hover {
+            /* Khi di chuột: Phóng to nhẹ, xoay thẳng lại, bóng đổ sâu hơn */
+            transform: scale(1.03) rotate(0deg) !important; 
+            z-index: 50;
+            box-shadow: 
+                inset 0 0 5px rgba(0,0,0,0.3),
+                0 0 0 1px #1a2a6c,
+                15px 25px 40px rgba(26, 42, 108, 0.4);
+        }
+        
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: 1px solid #eee; /* Viền nhẹ cho ảnh bên trong bo */
+        }
+
+        /* Nút phát nhạc */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: #1a2a6c;
+            color: #d4af37;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 2px solid #d4af37;
+            display: none;
+        }
+
+        /* --- LIGHTBOX --- */
+        #lightbox {
+            transition: opacity 0.3s ease;
+        }
+        #lightbox.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #lightbox.flex {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* --- FINALE SCREEN --- */
+        #finale-screen {
+            transition: opacity 0.5s ease;
+        }
+        #finale-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+            display: none;
+        }
+        #finale-screen.flex {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Cây thông trang trí cố định */
+        .fixed-tree-decor {
+            position: fixed;
+            bottom: 0;
+            left: 20px;
+            width: 150px;
+            z-index: 1;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+        @media (max-width: 768px) {
+            .fixed-tree-decor { width: 80px; left: 5px; }
+        }
+
+        .scroll-down-indicator {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+    </style>
+</head>
+<body class="locked text-navy font-sans antialiased">
+
+    <!-- BACKGROUND LAYERS -->
+    <div id="bg-layer"></div> <!-- Ảnh nền cũ (18.jpg) -->
+    
+    <!-- BACKGROUND MỚI CHÈN THÊM -->
+    <div id="bg-layer-2"></div> <!-- Ảnh nền mới -->
+
+    <div id="grain-overlay"></div> <!-- Hạt nhiễu vintage -->
+    <div id="tint-overlay"></div> <!-- Lớp phủ màu kem -->
+
+    <!-- CÂY THÔNG TRANG TRÍ GÓC (MỚI) -->
+    <img src="https://cdn-icons-png.flaticon.com/512/2607/2607519.png" alt="Christmas Tree" class="fixed-tree-decor" data-aos="fade-up">
+
+    <!-- BÓNG BAY TRANG TRÍ (Background Decoration) -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="balloon-bg"></div>
+        <div class="balloon-bg"></div>
+        <div class="balloon-bg"></div>
+        <div class="balloon-bg"></div>
+        <div class="balloon-bg"></div>
+        <div class="balloon-bg"></div>
+    </div>
+
+    <!-- FIREFLIES DECORATION (Được tạo bởi JS) -->
+    <div id="fireflies-container"></div>
+
+    <!-- Audio Nền -->
+    <audio id="bg-audio" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ audio.
+    </audio>
+
+    <!-- Audio Pháo hoa & Vỗ tay (Finale) -->
+    <audio id="finale-audio" loop>
+        <!-- Sử dụng file âm thanh tiếng pháo hoa và vỗ tay (ví dụ từ freesound.org hoặc nguồn khác) -->
+        <source src="https://orangefreesounds.com/wp-content/uploads/2024/12/Cheering-applause-sound-effect.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Nút điều khiển nhạc -->
+    <div id="music-control" onclick="toggleMusic()">
+        <i class="fas fa-volume-up"></i>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 hidden items-center justify-center p-4" onclick="closeLightbox()">
+        <button class="absolute top-5 right-5 text-white text-4xl hover:text-gold transition-colors" onclick="closeLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Zoomed Image" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border-4 border-gold" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- FINALE SCREEN -->
+    <div id="finale-screen" class="fixed inset-0 z-[110] bg-black/95 hidden flex-col items-center justify-center text-center p-4">
+        <button class="absolute top-5 right-5 text-white text-4xl hover:text-gold transition-colors z-50" onclick="closeFinale()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- Thêm Decor Xmas Finale -->
+        <div class="absolute top-10 left-10 text-6xl text-xmasRed animate-bounce"><i class="fas fa-candy-cane"></i></div>
+        <div class="absolute top-10 right-10 text-6xl text-pineGreen animate-bounce"><i class="fas fa-tree"></i></div>
+
+        <h1 class="font-hand text-5xl md:text-7xl text-gold mb-4 animate-bounce-slow">Chúc Mừng Sinh Nhật</h1>
+        <h2 class="font-serif text-6xl md:text-9xl text-white font-bold mb-8 drop-shadow-lg" style="text-shadow: 0 0 20px #d4af37;">Bố Trung</h2>
+        
+        <div class="relative mb-8">
+            <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 text-8xl md:text-9xl font-bold text-gold opacity-20">54</div>
+            <div class="text-6xl md:text-8xl font-bold text-white relative z-10">54 <span class="text-3xl md:text-5xl font-serif text-gold">Tuổi</span></div>
+        </div>
+
+        <!-- Ảnh bánh kem -->
+        <div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto mb-8 rounded-full border-4 border-gold p-2 bg-white/10 shadow-[0_0_50px_rgba(212,175,55,0.3)]">
+             <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1089&auto=format&fit=crop" alt="Bánh Kem Sinh Nhật" class="w-full h-full object-cover rounded-full">
+        </div>
+
+        <p class="text-white text-lg italic max-w-lg">"Tuổi mới chúc Bố luôn mạnh khỏe, phong độ và hạnh phúc bên con cháu!"</p>
+    </div>
+
+    <!-- PHẦN 1: OPENING - HỘP QUÀ -->
+    <div id="intro-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-cream transition-opacity duration-1000 bg-opacity-95">
+        <div class="text-center mb-10 relative">
+            <i class="fas fa-star text-gold absolute -top-8 -left-8 text-2xl animate-pulse sparkle"></i>
+            <i class="fas fa-star text-gold absolute -bottom-8 -right-8 text-2xl animate-pulse sparkle"></i>
+            <h1 class="text-4xl md:text-6xl font-serif text-navy font-bold mb-4 relative" data-aos="fade-down">
+                Chúc Mừng Sinh Nhật Bố Trung!
+                <i class="fas fa-star text-gold absolute -top-4 -left-6 text-xl animate-spin-slow sparkle"></i>
+                <i class="fas fa-star text-gold absolute -bottom-2 -right-6 text-xl animate-spin-slow sparkle"></i>
+            </h1>
+            <p class="text-xl text-gold italic font-serif">Mời bố mở món quà đặc biệt này...</p>
+        </div>
+
+        <div class="gift-container" onclick="openGift()">
+            <div class="gift-box" id="giftBox">
+                <div class="lid"></div>
+                <div class="gift-face front"></div>
+                <div class="gift-face back"></div>
+                <div class="gift-face left"></div>
+                <div class="gift-face right"></div>
+                <div class="gift-face bottom"></div>
+            </div>
+        </div>
+
+        <p class="mt-10 text-sm text-gray-400 animate-pulse">(Click vào hộp quà để mở)</p>
+    </div>
+
+    <!-- PHẦN 2: NỘI DUNG CHÍNH (Timeline) -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000 relative">
+        
+        <!-- DÂY CỜ TRANG TRÍ -->
+        <div class="bunting-container">
+            <div class="bunting-rope"></div>
+            <!-- Các lá cờ -->
+            <div class="flag" style="left: 10%;"></div>
+            <div class="flag" style="left: 20%;"></div>
+            <div class="flag" style="left: 30%;"></div>
+            <div class="flag" style="left: 40%;"></div>
+            <div class="flag" style="left: 50%;"></div>
+            <div class="flag" style="left: 60%;"></div>
+            <div class="flag" style="left: 70%;"></div>
+            <div class="flag" style="left: 80%;"></div>
+            <div class="flag" style="left: 90%;"></div>
+        </div>
+
+        <!-- Header sau khi mở quà -->
+        <header class="h-screen flex flex-col items-center justify-center text-center px-4 relative">
+            
+            <!-- DÂY ĐÈN TRANG TRÍ HEADER -->
+            <div class="light-string w-2/3 mx-auto top-10">
+                <div class="c-light"></div><div class="c-light"></div><div class="c-light"></div>
+                <div class="c-light"></div><div class="c-light"></div><div class="c-light"></div>
+                <div class="c-light"></div><div class="c-light"></div><div class="c-light"></div>
+            </div>
+
+            <div class="absolute top-1/4 left-10 md:left-20 text-gold opacity-30 text-6xl"><i class="fas fa-quote-left"></i></div>
+            <div class="absolute bottom-1/4 right-10 md:right-20 text-gold opacity-30 text-6xl"><i class="fas fa-quote-right"></i></div>
+
+            <h1 class="font-hand text-6xl md:text-8xl text-navy mb-4 drop-shadow-md relative" data-aos="zoom-in">
+                <!-- Thêm mũ Noel -->
+                <i class="fas fa-hat-santa santa-hat-icon"></i>
+                Happy Birthday Bố Trung
+                <i class="fas fa-star text-gold absolute -top-6 -left-8 text-3xl animate-spin-slow sparkle"></i>
+                <i class="fas fa-star text-gold absolute -bottom-4 -right-8 text-3xl animate-spin-slow sparkle"></i>
+            </h1>
+            <div class="flex items-center justify-center gap-4 mb-8">
+                <span class="h-px w-12 bg-gold"></span>
+                <i class="fas fa-holly-berry text-xmasRed text-2xl"></i> <!-- Biểu tượng Holly -->
+                <span class="h-px w-12 bg-gold"></span>
+            </div>
+            <p class="font-serif text-2xl text-gold" data-aos="fade-up" data-aos-delay="300">Người đàn ông tuyệt vời nhất của gia đình</p>
+            <div class="scroll-down-indicator absolute bottom-10">
+                <i class="fas fa-chevron-down text-3xl text-navy opacity-50"></i>
+            </div>
+        </header>
+
+        <!-- Container Timeline -->
+        <div class="max-w-6xl mx-auto px-4 py-20 relative overflow-hidden">
+            <!-- Đường kẻ dọc -->
+            <div class="timeline-line"></div>
+
+            <!-- MỐC 1: NGÀY CƯỚI -->
+            <div class="relative mb-24 md:flex items-center justify-between timeline-item group">
+                <div class="timeline-dot top-8"></div>
+                
+                <!-- Bên trái (Text) -->
+                <div class="md:w-5/12 timeline-content text-right pr-12 mb-8 md:mb-0" data-aos="fade-right">
+                    <span class="text-gold font-bold text-lg tracking-widest uppercase flex items-center justify-end gap-2">
+                        Khởi đầu hạnh phúc <i class="fas fa-ring"></i>
+                    </span>
+                    <h2 class="text-4xl font-serif text-navy font-bold mt-2 mb-4">Ngày Chung Đôi</h2>
+                    <p class="text-gray-600 leading-relaxed bg-white/80 p-4 rounded-lg shadow-sm backdrop-blur-sm border border-gold/20 relative">
+                        <!-- Icon trang trí nhỏ -->
+                        <i class="fas fa-gifts absolute -top-3 -left-3 text-2xl text-xmasRed transform -rotate-12"></i>
+                        Khoảnh khắc thiêng liêng đánh dấu sự khởi đầu của một gia đình hạnh phúc. Tình yêu của Bố Mẹ là tấm gương sáng cho chúng con noi theo.
+                    </p>
+                    <div class="mt-4 inline-block border-b-2 border-gold pb-1 italic text-navy">
+                        <i class="fas fa-heart text-red-500 mr-2"></i>Mãi mãi bên nhau
+                    </div>
+                </div>
+
+                <!-- Bên phải (Images) -->
+                <div class="md:w-5/12 pl-0 md:pl-12" data-aos="fade-left">
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Placeholder: Wedding 1 (Dọc) -->
+                        <div class="photo-frame transform -rotate-2" onclick="openLightbox(this.querySelector('img'))">
+                            <i class="fas fa-holly-berry frame-decor-corner"></i> <!-- Decor cây thông góc -->
+                            <img src="7.jpg" alt="Ảnh cưới đứng" class="h-64 object-cover">
+                        </div>
+                        <!-- Placeholder: Wedding 2 (Cận) -->
+                        <div class="photo-frame transform translate-y-8 rotate-3" onclick="openLightbox(this.querySelector('img'))">
+                            <img src="2.jpg" alt="Ảnh cưới cận" class="h-64 object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MỐC 2: THANH XUÂN -->
+            <div class="relative mb-24 md:flex flex-row-reverse items-center justify-between timeline-item group">
+                <div class="timeline-dot top-8"></div>
+                
+                <!-- Bên phải (Text - Đảo ngược) -->
+                <div class="md:w-5/12 timeline-content text-left pl-12 mb-8 md:mb-0" data-aos="fade-left">
+                    <span class="text-gold font-bold text-lg tracking-widest uppercase flex items-center justify-start gap-2">
+                        <i class="fas fa-music"></i> Thập niên 2000
+                    </span>
+                    <h2 class="text-4xl font-serif text-navy font-bold mt-2 mb-4">Thanh Xuân Rực Rỡ</h2>
+                    <p class="text-gray-600 leading-relaxed bg-white/80 p-4 rounded-lg shadow-sm backdrop-blur-sm border border-gold/20 relative">
+                        <i class="fas fa-snowflake absolute -top-3 -right-3 text-2xl text-blue-300 animate-spin-slow"></i>
+                        Bố mẹ ngày xưa thật phong cách và đẹp đôi. Những năm tháng tuổi trẻ đầy nhiệt huyết, luôn sát cánh bên nhau xây dựng tổ ấm.
+                    </p>
+                </div>
+
+                <!-- Bên trái (Images Grid) -->
+                <div class="md:w-5/12 pr-0 md:pr-12" data-aos="fade-right">
+                    <!-- Dây đèn treo trên khung ảnh -->
+                    <div class="light-string w-full relative -top-4">
+                        <div class="c-light"></div><div class="c-light"></div><div class="c-light"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2">
+                        <!-- 5 Ảnh Thanh Xuân -->
+                        <div class="photo-frame col-span-2 row-span-2" onclick="openLightbox(this.querySelector('img'))">
+                            <img src="3.jpg" alt="Ngày xưa 1" class="h-full">
+                        </div>
+                        <div class="photo-frame" onclick="openLightbox(this.querySelector('img'))">
+                            <img src="4.jpg" alt="Ngày xưa 2">
+                        </div>
+                        <div class="photo-frame" onclick="openLightbox(this.querySelector('img'))">
+                            <img src="5.jpg" alt="Ngày xưa 3">
+                        </div>
+                        <div class="photo-frame col-span-3" onclick="openLightbox(this.querySelector('img'))">
+                            <img src="6.jpg" alt="Ngày xưa 4" class="h-32 w-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MỐC 3: DU LỊCH -->
+            <div class="relative mb-24 md:flex items-center justify-between timeline-item group">
+                <div class="timeline-dot top-8"></div>
+                
+                <!-- Bên trái (Text) -->
+                <div class="md:w-5/12 timeline-content text-right pr-12 mb-8 md:mb-0" data-aos="fade-right">
+                    <span class="text-gold font-bold text-lg tracking-widest uppercase flex items-center justify-end gap-2">
+                        Tận hưởng cuộc sống <i class="fas fa-plane"></i>
+                    </span>
+                    <h2 class="text-4xl font-serif text-navy font-bold mt-2 mb-4">Vi Vu Khắp Chốn</h2>
+                    <p class="text-gray-600 leading-relaxed bg-white/80 p-4 rounded-lg shadow-sm backdrop-blur-sm border border-gold/20">
+                        Những chuyến đi đầy ắp tiếng cười. Từ biển xanh cát trắng đến những miền đất mới lạ. Mong Bố luôn giữ vững tinh thần lạc quan và sức khỏe dẻo dai để đi nhiều hơn nữa!
+                    </p>
+                </div>
+
+                <!-- Bên phải (Images Layout: 2 trên, 2 dưới, 1 to) -->
+                <div class="md:w-5/12 pl-0 md:pl-12" data-aos="fade-left">
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                             <div class="photo-frame w-1/2 transform -rotate-2" onclick="openLightbox(this.querySelector('img'))">
+                                <i class="fas fa-holly-berry frame-decor-corner"></i>
+                                <img src="8.jpg" alt="Biển 1">
+                            </div>
+                            <div class="photo-frame w-1/2 transform rotate-2" onclick="openLightbox(this.querySelector('img'))">
+                                <img src="9.jpg" alt="Biển 2">
+                            </div>
+                        </div>
+                        <div class="photo-frame w-full" onclick="openLightbox(this.querySelector('img'))">
+                             <img src="10.jpg" alt="Đi thuyền" class="h-40 w-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MỐC 4: XE MỚI -->
+            <div class="relative mb-24 md:flex flex-row-reverse items-center justify-between timeline-item group">
+                <div class="timeline-dot top-8"></div>
+                
+                <div class="md:w-5/12 timeline-content text-left pl-12 mb-8 md:mb-0" data-aos="fade-left">
+                    <span class="text-gold font-bold text-lg tracking-widest uppercase flex items-center justify-start gap-2">
+                        <i class="fas fa-car"></i> Thành quả lao động
+                    </span>
+                    <h2 class="text-4xl font-serif text-navy font-bold mt-2 mb-4">Dấu Ấn Thành Công</h2>
+                    <p class="text-gray-600 leading-relaxed bg-white/80 p-4 rounded-lg shadow-sm backdrop-blur-sm border border-gold/20 relative">
+                        <i class="fas fa-star text-gold absolute -top-4 -left-4 text-3xl animate-spin-slow"></i>
+                        Chúc mừng Bố với "vợ hai" mới toanh! Đây là thành quả xứng đáng cho bao nỗ lực không ngừng nghỉ của Bố vì gia đình. Chúc Bố vững tay lái trên mọi nẻo đường.
+                    </p>
+                </div>
+
+                <div class="md:w-5/12 pr-0 md:pr-12" data-aos="fade-right">
+                    <div class="relative">
+                         <!-- Ảnh xe chính -->
+                        <div class="photo-frame relative z-10" onclick="openLightbox(this.querySelector('img'))">
+                            <img src="13.jpg" alt="Xe mới 1">
+                        </div>
+                        <!-- Ảnh phụ nhỏ hơn -->
+                        <div class="photo-frame absolute -bottom-10 -right-5 w-1/2 z-20 transform rotate-6 border-4 border-white" onclick="openLightbox(this.querySelector('img'))">
+                             <img src="14.jpg" alt="Xe mới 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MỐC 5: HIỆN TẠI & LỜI CHÚC -->
+            <div class="relative mt-32 text-center" data-aos="fade-up">
+                <div class="timeline-dot top-0"></div>
+                
+                <h2 class="text-5xl font-serif text-navy font-bold mb-8 pt-10 relative inline-block">
+                    Hạnh Phúc Giản Đơn
+                    <i class="fas fa-holly-berry text-xmasRed absolute -top-4 -left-6 text-2xl"></i>
+                    <i class="fas fa-holly-berry text-xmasRed absolute -bottom-2 -right-6 text-2xl"></i>
+                </h2>
+                <div class="w-24 h-1 bg-gold mx-auto mb-8"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-12 bg-white/80 p-6 rounded-lg shadow-sm backdrop-blur-sm border border-gold/20">
+                    Niềm vui lớn nhất của chúng con là thấy Bố Mẹ mạnh khỏe, vui vầy bên con cháu. Cảm ơn Bố vì tất cả những hy sinh thầm lặng.
+                </p>
+
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 px-4 md:px-0">
+                    <div class="photo-frame" data-aos="zoom-in" data-aos-delay="100" onclick="openLightbox(this.querySelector('img'))">
+                        <i class="fas fa-holly-berry frame-decor-corner"></i>
+                        <img src="23.jpg" alt="Now 1">
+                    </div>
+                    <div class="photo-frame" data-aos="zoom-in" data-aos-delay="200" onclick="openLightbox(this.querySelector('img'))"><img src="17.jpg" alt="Now 2"></div>
+                    <div class="photo-frame" data-aos="zoom-in" data-aos-delay="300" onclick="openLightbox(this.querySelector('img'))"><img src="22.jpg" alt="Now 3"></div>
+                    <div class="photo-frame" data-aos="zoom-in" data-aos-delay="400" onclick="openLightbox(this.querySelector('img'))"><img src="19.jpg" alt="Now 4"></div>
+                    <div class="photo-frame" data-aos="zoom-in" data-aos-delay="500" onclick="openLightbox(this.querySelector('img'))"><img src="20.jpg" alt="Now 5"></div>
+                    <div class="photo-frame" data-aos="zoom-in" data-aos-delay="600" onclick="openLightbox(this.querySelector('img'))">
+                         <i class="fas fa-holly-berry frame-decor-corner"></i>
+                        <img src="18.jpg">
+                    </div>
+                </div>
+
+                <!-- Lời chúc cuối & Nút Bất Ngờ -->
+                <div class="bg-white p-8 md:p-12 shadow-xl rounded-lg max-w-3xl mx-auto border border-gold relative overflow-hidden mb-20 group hover:shadow-2xl transition-all">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-navy via-gold to-navy"></div>
+                    
+                    <!-- Decor góc -->
+                    <i class="fas fa-gift text-gold opacity-10 text-9xl absolute -bottom-10 -right-10 transform rotate-12"></i>
+                    
+                    <h3 class="font-hand text-5xl md:text-7xl text-navy mb-6">Cả nhà yêu Bố Trung!</h3>
+                    <p class="text-lg text-gray-700 italic relative z-10">
+                        "Chúc Bố sinh nhật vui vẻ. Mong Bố luôn là cây cao bóng cả che chở cho chúng con."
+                    </p>
+                    <div class="mt-8 flex flex-col md:flex-row gap-4 justify-center items-center relative z-10">
+                        <button onclick="scrollToTop()" class="px-6 py-3 bg-white border-2 border-navy text-navy rounded-full hover:bg-gray-100 transition-colors duration-300 font-bold">
+                            <i class="fas fa-arrow-up mr-2"></i> Xem lại kỷ niệm
+                        </button>
+                        
+                        <!-- NÚT BẤT NGỜ MỚI -->
+                        <button onclick="triggerFinale()" class="px-8 py-4 bg-gradient-to-r from-gold to-yellow-600 text-white rounded-full hover:scale-105 transition-transform duration-300 shadow-lg font-bold text-lg animate-pulse-fast">
+                            <i class="fas fa-gift mr-2"></i> BẤM VÀO ĐÂY ĐỂ NHẬN QUÀ CUỐI!
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End Container Timeline -->
+
+        <!-- Footer -->
+        <footer class="bg-navy text-cream text-center py-8">
+            <p class="font-serif text-sm">Made with ❤️ by Con Phi</p>
+            <p class="text-xs text-gray-400 mt-2">© 2025 Family Memories</p>
+        </footer>
+    </div>
+
+    <!-- THƯ VIỆN JS -->
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Khởi tạo AOS (Animation On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: false, // Animation lặp lại khi cuộn lên xuống
+            mirror: true,
+            offset: 100
+        });
+
+        const bgAudio = document.getElementById('bg-audio');
+        const musicBtn = document.getElementById('music-control');
+        const musicIcon = musicBtn.querySelector('i');
+        let isMusicPlaying = false;
+
+        // Tạo đom đóm (Fireflies)
+        function createFireflies() {
+            const container = document.getElementById('fireflies-container');
+            const fireflyCount = 20; // Số lượng đom đóm
+            
+            for (let i = 0; i < fireflyCount; i++) {
+                const firefly = document.createElement('div');
+                firefly.classList.add('firefly');
+                
+                // Vị trí ngẫu nhiên
+                firefly.style.left = Math.random() * 100 + 'vw';
+                firefly.style.top = Math.random() * 100 + 'vh';
+                
+                // Kích thước ngẫu nhiên
+                const size = Math.random() * 4 + 2 + 'px';
+                firefly.style.width = size;
+                firefly.style.height = size;
+                
+                // Thời gian animation ngẫu nhiên
+                firefly.style.animationDuration = Math.random() * 10 + 10 + 's';
+                firefly.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(firefly);
+            }
+        }
+        createFireflies();
+
+        // --- XỬ LÝ LIGHTBOX (Xem ảnh) ---
+        function openLightbox(img) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = img.src;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        }
+
+        // --- XỬ LÝ QUÀ TẶNG & NHẠC ---
+        function openGift() {
+            const giftBox = document.getElementById('giftBox');
+            const introScreen = document.getElementById('intro-screen');
+            const mainContent = document.getElementById('main-content');
+            const body = document.body;
+
+            giftBox.classList.add('open');
+
+            // Bắn pháo giấy nhẹ lúc mở
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Phát nhạc
+            bgAudio.volume = 0.8;
+            bgAudio.play().then(() => {
+                isMusicPlaying = true;
+                musicBtn.style.display = 'flex';
+                musicIcon.className = 'fas fa-volume-up';
+            }).catch(e => {
+                musicBtn.style.display = 'flex';
+                musicIcon.className = 'fas fa-volume-mute';
+                isMusicPlaying = false;
+            });
+
+            setTimeout(() => {
+                introScreen.style.opacity = '0';
+                setTimeout(() => {
+                    introScreen.style.display = 'none';
+                    body.classList.remove('locked');
+                    mainContent.style.opacity = '1';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    AOS.refresh();
+                }, 1000);
+            }, 1500);
+        }
+
+        // --- XỬ LÝ MÀN HÌNH CUỐI (FINALE) ---
+        let fireworksInterval;
+        const finaleAudio = document.getElementById('finale-audio');
+
+        function triggerFinale() {
+            const finaleScreen = document.getElementById('finale-screen');
+            finaleScreen.classList.remove('hidden');
+            finaleScreen.classList.add('flex');
+
+            // Phát âm thanh pháo hoa và vỗ tay
+            finaleAudio.currentTime = 0; // Phát từ đầu
+            finaleAudio.play();
+
+            // Hiệu ứng pháo hoa liên tục
+            const duration = 15 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 120 };
+
+            function randomInRange(min, max) {
+              return Math.random() * (max - min) + min;
+            }
+
+            fireworksInterval = setInterval(function() {
+              const timeLeft = animationEnd - Date.now();
+
+              if (timeLeft <= 0) {
+                return clearInterval(fireworksInterval);
+              }
+
+              const particleCount = 50 * (timeLeft / duration);
+              
+              // Bắn từ 2 bên ngẫu nhiên
+              confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+              confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+            }, 250);
+        }
+
+        function closeFinale() {
+            const finaleScreen = document.getElementById('finale-screen');
+            finaleScreen.classList.add('hidden');
+            finaleScreen.classList.remove('flex');
+            clearInterval(fireworksInterval); // Dừng pháo hoa
+            finaleAudio.pause(); // Dừng âm thanh finale
+        }
+
+        // Toggle Music
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgAudio.pause();
+                musicIcon.className = 'fas fa-volume-mute';
+                isMusicPlaying = false;
+            } else {
+                bgAudio.play();
+                musicIcon.className = 'fas fa-volume-up';
+                isMusicPlaying = true;
+            }
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
